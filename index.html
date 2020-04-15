@@ -103,7 +103,7 @@
                         <li><a target="_blank" href="https://linkedin.com/kangarief"><i class="fa fa-linkedin"></i></a></li>
                         <li><a target="_blank" href="https://github.com/ariefcahya"><i class="fa fa-github"></i></a></li>
                         <li><a target="_blank" href="https://wa.me/6282225678324"><i class="fa fa-whatsapp"></i></a></li>
-                        <li><a href="#"><i class="fa fa-telegram"></i></a></li>
+                        <li><a target="_blank" href="https://t.me/ariefcahya"><i class="fa fa-telegram"></i></a></li>
                     </ul>
 
                 </div>
@@ -366,31 +366,32 @@
             <div class="col-md-12 position font-para text-center">
                 <h2 class="font-alt heading ">Contact Me</h2>
                 <div class="row">
-                    <form class="cont-inline cont-mess flato col-md-12" action="http://ingenious-hub.com/Intelart/demo/contact.php" method="post">
+                    <form id="my-form" class="cont-inline cont-mess flato col-md-12" action="https://formspree.io/xoqnrzbg" method="post">
                         <div class="col-md-6">
 
                             <div class="cont-group col-sm-12">
-                                <input type="text" class="form-control" placeholder="Name" required>
+                                <input type="text" class="form-control" name="name" placeholder="Name" required>
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="cont-group col-sm-12">
-                                <input type="email" class="form-control" placeholder="E-mail" required="required">
+                                <input type="email" class="form-control" name="email" placeholder="E-mail" required="required">
                             </div>
                         </div>
                         <div class="col-md-12">
 
                             <div class="cont-group col-sm-12">
-                                <textarea cols="30" rows="10" placeholder="Message"></textarea>
+                                <textarea cols="30" rows="10" name="message" placeholder="Message"></textarea>
                             </div>
 
                         </div>
 
                         <div class="col-md-12">
                             <div class="send_btn">
-                                <a href="#" class="btn btn-4"><span>Submit</span></a>
+                                <button id="my-form-button" class="btn btn-4"><span>Submit</span></button>
                             </div>
+                            <label id="my-form-status" class="text-success mt-5"></label>
                         </div>
                     </form>
                 </div>
@@ -434,7 +435,7 @@
                     <li><a target="_blank" href="https://linkedin.com/kangarief"><i class="fa fa-linkedin"></i></a></li>
                     <li><a target="_blank" href="https://github.com/ariefcahya"><i class="fa fa-github"></i></a></li>
                     <li><a target="_blank" href="https://wa.me/6282225678324"><i class="fa fa-whatsapp"></i></a></li>
-                    <li><a href="#"><i class="fa fa-telegram"></i></a></li>
+                    <li><a target="_blank" href="https://t.me/ariefcahya"><i class="fa fa-telegram"></i></a></li>
                 </ul>
 
             </div>
@@ -487,6 +488,53 @@
 </body>
 <!-- Body End -->
 
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
 
-<!-- Mirrored from ingenious-hub.com/Intelart/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 13 Apr 2020 07:12:38 GMT -->
+        // get the form elements defined in your form HTML above
+
+        var form = document.getElementById("my-form");
+        var button = document.getElementById("my-form-button");
+        var status = document.getElementById("my-form-status");
+
+        // Success and Error functions for after the form is submitted
+
+        function success() {
+            form.reset();
+            button.style = "display: none ";
+            status.innerHTML = "Thank you for contacting me. I will contact you very soon.";
+        }
+
+        function error() {
+            status.innerHTML = "Oops! There was a problem.";
+        }
+
+        // handle the form submission event
+
+        form.addEventListener("submit", function(ev) {
+            button.innerHTML='<i class="fa fa-spinner fa-spin"></i>'
+            ev.preventDefault();
+            var data = new FormData(form);
+            ajax(form.method, form.action, data, success, error);
+        });
+    });
+
+    // helper function for sending an AJAX request
+
+    function ajax(method, url, data, success, error) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+                success(xhr.response, xhr.responseType);
+            } else {
+                error(xhr.status, xhr.response, xhr.responseType);
+            }
+        };
+        xhr.send(data);
+    }
+</script>
+
 </html>
