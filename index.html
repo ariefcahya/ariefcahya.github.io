@@ -368,30 +368,40 @@
                 <div class="row">
                     <form id="my-form" class="cont-inline cont-mess flato col-md-12" action="https://formspree.io/xoqnrzbg" method="post">
                         <div class="col-md-6">
-
                             <div class="cont-group col-sm-12">
-                                <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                <input type="text" class="form-control required" name="name" placeholder="Name" >
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="cont-group col-sm-12">
-                                <input type="email" class="form-control" name="email" placeholder="E-mail" required="required">
+                                <input type="email" class="form-control required" name="email" placeholder="E-mail">
                             </div>
                         </div>
                         <div class="col-md-12">
-
                             <div class="cont-group col-sm-12">
-                                <textarea cols="30" rows="10" name="message" placeholder="Message"></textarea>
+                                <textarea class="required" cols="30" rows="10" name="message" placeholder="Message"></textarea>
                             </div>
 
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="cont-group col-sm-12">
+                            <div class="captcha-wrap">
+                                <div class="recaptcha">
+                                    <div class="g-recaptcha pull-left" id="captcha2" data-sitekey="6LeswOkUAAAAACkrS-QYRqWzyc-n3m9AZDvC8SrI"></div>
+                                    <div id='captcha-err'></div>
+                                    <div class="clearfix"></div>
+                                    <input type="text" class="hiddenRecaptcha" name="hiddenRecaptcha" id="hiddenRecaptcha" style="display: none">
+                                </div>
+                            </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="send_btn">
                                 <button id="my-form-button" class="btn btn-4"><span>Submit</span></button>
                             </div>
-                            <label id="my-form-status" class="text-success mt-5"></label>
+                            <label id="my-form-status" class="text-success mt-5" style="display: none"></label>
                         </div>
                     </form>
                 </div>
@@ -471,6 +481,7 @@
 <!-- jQuery -->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.0.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 
 <!-- Plugins -->
 <script src="js/popper.min.js"></script>
@@ -485,10 +496,38 @@
 <!-- custom -->
 <script src="js/script.js"></script>
 <script src="js/custom.js"></script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
 </body>
 <!-- Body End -->
 
 <script>
+    $(function() {
+        $('form').validate({
+            rules: {
+                hiddenRecaptcha: {
+                    required: true,
+                },
+            },
+            messages: {
+                "hiddenRecaptcha": "Captcha is required",
+            },
+
+        });
+    })
+
+    var CaptchaCallback = function() {
+        var widgetId1;
+        widgetId1 = grecaptcha.render('captcha2', {
+            'sitekey': '6LeswOkUAAAAACkrS-QYRqWzyc-n3m9AZDvC8SrI',
+            'callback': correctCaptcha_contact
+        });
+    };
+    var correctCaptcha_contact = function(response) {
+        $("#hiddenRecaptcha").val(response);
+    };
+
+
     window.addEventListener("DOMContentLoaded", function() {
 
         // get the form elements defined in your form HTML above
@@ -502,6 +541,7 @@
         function success() {
             form.reset();
             button.style = "display: none ";
+            status.style = "display: block ";
             status.innerHTML = "Thank you for contacting me. I will contact you very soon.";
         }
 
@@ -512,10 +552,12 @@
         // handle the form submission event
 
         form.addEventListener("submit", function(ev) {
-            button.innerHTML='<i class="fa fa-spinner fa-spin"></i>'
-            ev.preventDefault();
-            var data = new FormData(form);
-            ajax(form.method, form.action, data, success, error);
+            if($('form').valid()) {
+                button.innerHTML = '<i class="fa fa-spinner fa-spin"></i>'
+                ev.preventDefault();
+                var data = new FormData(form);
+                // ajax(form.method, form.action, data, success, error);
+            }
         });
     });
 

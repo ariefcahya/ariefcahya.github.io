@@ -4,7 +4,7 @@
 Project:        Intelart - Personal Portfolio HTML5 Template
 Version:        1.0
 Last change:    20/04/2020
-Primary use:    Business Agency. 
+Primary use:    Business Agency.
 Author:         Ingenious_team
 ------------------
 
@@ -89,7 +89,7 @@ body {
 }
 
 /* ============================
-            common 
+            common
 ========================= */
 
 .pr0 {
@@ -195,6 +195,13 @@ img {
     font-weight: 400;
     line-height: 24px;
     text-align: center;
+}
+
+label.error{
+    float: left;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #ce0e0e;
 }
 
 
@@ -409,7 +416,7 @@ img {
     position: relative;
     padding-top: 30%;
      transform: translateY(-8%);
-    
+
 }
 .home-text-center {
     position: relative;
@@ -557,7 +564,7 @@ animation: pulse 1.5s infinite;
     -moz-box-shadow: 0px 0px 80px 4px rgba(7, 19, 68, .3);
     -o-box-shadow: 0px 0px 80px 4px rgba(7, 19,68, .3);
     -webkit-clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%);   
+    clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%);
 }
 
 .html5 {
@@ -727,7 +734,7 @@ animation: pulse 1.5s infinite;
         Portfolio Part
    ============================== */
 #portfolio{
-    background: #f1f1f1; 
+    background: #f1f1f1;
     padding-bottom: 40px;
 }
 #portfolio .heading{
@@ -780,7 +787,7 @@ ul.filter > li > a:focus {
 .portfolio_img:hover .overlay {
     bottom: 0;
     height: 100%;
-   
+
 }
 .portfolio_img-1:hover,
 .portfolio_img:hover{
@@ -1118,7 +1125,7 @@ left: 1%;
     font-size: 14px;
     color: #999;
     padding-bottom: 30px;
-   
+
 }
 .slick-slide.slick-center .testimonial-text{
     margin-top: 60px;
@@ -1175,6 +1182,11 @@ left: 1%;
     background-color: transparent;
     border-radius: 2px;
     padding-left: 17px;
+}
+
+.cont-inline .cont-group .form-control.error,
+.cont-inline .cont-group textarea.error {
+    border:1px solid #ce0e0e;
 }
 
 .cont-inline .cont-group textarea {
@@ -1437,7 +1449,7 @@ left: 1%;
     padding: 16px;
 }
 /*=====================================
-Download popup Part Start start 
+Download popup Part Start start
 =======================================*/
 
 .modal-content {
