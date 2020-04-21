@@ -1,3 +1,3 @@
 User-agent: *
-Allow:
-sitemap: http://www.kangarief.com/sitemap.xml
+Allow: /
+Sitemap: https://www.kangarief.com/sitemap.xml
