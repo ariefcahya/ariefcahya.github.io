@@ -29,3 +29,11 @@
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType text/css "access plus 1 year"
 </IfModule>
+
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+    Header set Expires "Wed, 15 Apr 2020 20:00:00 GMT"
+    Header set Cache-Control "public"
+  </FilesMatch>
+</IfModule>
